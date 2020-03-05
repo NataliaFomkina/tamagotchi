@@ -11,7 +11,7 @@ public class Pet {
     public String[] eatPictures = new String[3];
     public String sleepPicture;
 
-    public enum States {USUAL, HAPPY, SAD, SlEEP}
+    public enum States {USUAL, HAPPY, SAD, SlEEP,DEAD}
 
     private int satiety;//сытость
     private int energy;//энергия
@@ -23,10 +23,10 @@ public class Pet {
 
     public Pet(int maxAge) {
         state = States.HAPPY;
-        satiety = 9;
-        energy = 5;
-        hygiene = 9;
-        fun = 1;
+        satiety = 10;
+        energy = 10;
+        hygiene = 10;
+        fun = 10;
         age = 0;
         this.maxAge = maxAge;
     }
@@ -82,7 +82,10 @@ public class Pet {
 
     //методы
     public void updateState() {
-        if ((satiety + energy + hygiene + fun) / 4 >= 8) state = States.HAPPY;
+        if(satiety <=0 ) {
+            state = States.DEAD;
+        }
+        else if ((satiety + energy + hygiene + fun) / 4 >= 8) state = States.HAPPY;
         else if ((satiety + energy + hygiene + fun) / 4 > 5) state = States.USUAL;
         else state = States.SAD;
     }
@@ -139,13 +142,13 @@ public class Pet {
     }
 
     public String newScales(int sS) {//возвращает картинку для шкалы
-        if (sS >= 0 && sS <= 1) {
+        if (sS <= 1) {
             return "/pictures/0scale.png";
-        } else if (sS >= 1 && sS <= 3) {
+        } else if (sS <= 3) {
             return "/pictures/1scale.png";
-        } else if (sS >= 4 && sS <= 6) {
+        } else if (sS <= 6) {
             return "/pictures/2scale.png";
-        } else if (sS >= 7 && sS <= 9) {
+        } else if (sS <= 9) {
             return "/pictures/3scale.png";
         } else if (sS == 10) {
             return "/pictures/4scale.png";
